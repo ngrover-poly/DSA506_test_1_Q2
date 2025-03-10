@@ -32,6 +32,6 @@ def handle_input(df, school_filter):
         case  _:
             return df 
             
-students = handle_input(filtered_students, school_filter)
+students = handle_input(students, school_filter)
 
 year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
