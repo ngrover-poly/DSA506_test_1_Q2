@@ -10,7 +10,7 @@ st.sidebar.header('Filters')
 term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'].unique()))
 
 # Other filters
-year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
+year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), none)
 
 if not term_filter and not year:
     filtered_students = students
