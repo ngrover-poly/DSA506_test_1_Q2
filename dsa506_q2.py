@@ -3,11 +3,6 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import streamlit as st
-
 students = pd.read_csv('university_student_dashboard_data.csv')
 filtered_students = None
 filtered_students1 = None
@@ -39,7 +34,7 @@ st.metric('Total Enrollment Since 2015', students['Enrolled'].sum())
 st.metric('Filtered Enrollment', filtered_students['Enrolled'].sum())
 
 # Charts
-st.subheader('Charts')
+st.subheader('Charts (filtered by term)')
 fig = px.line(filtered_students1, x='Year', y='Retention Rate (%)', title='Retention Rates')
 fig1 = px.line(filtered_students1, x='Year', y='Student Satisfaction (%)', title='Student Satisfaction')
 
@@ -64,5 +59,5 @@ with chart3:
 
 with chart4:
     st.subheader('Science Enrollment By Year')
-    fig5 = px.bar(filtered_students1, x='Year', y='Engineering Enrolled', title='Engineering Enrollment by Year')
+    fig5 = px.bar(filtered_students1, x='Year', y='Science Enrolled', title='Science Enrollment by Year')
     st.plotly_chart(fig5,use_container_width=True)
