@@ -7,6 +7,16 @@ students = pd.read_csv('university_student_dashboard_data.csv')
 
 filtered_students = students.copy()
 
+# Sidebar Filters
+st.sidebar.header('Filters')
+term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'].unique()))
+
+# Other filters
+year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
+filtered_students = students[students['Year'] == year]
+
+if term_filter != 'All':
+    filtered_students = students[students['Term'] == term_filter]
 if not term_filter and not year:
     filtered_students = students
 elif term_filter and not year:
@@ -21,18 +31,6 @@ st.title('University Students Dashboard')
 st.metric('Total Applications', filtered_students['Applications'].sum())
 st.metric('Total Admissions', filtered_students['Admitted'].sum())
 st.metric('Total Enrollment', filtered_students['Enrolled'].sum())
-
-
-# Sidebar Filters
-st.sidebar.header('Filters')
-term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'].unique()))
-if term_filter != 'All':
-    filtered_students = students[students['Term'] == term_filter]
-
-# Other filters
-year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
-filtered_students = students[students['Year'] == year]
-
 
 # Charts
 st.subheader('Charts')
