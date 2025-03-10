@@ -5,12 +5,20 @@ import streamlit as st
 
 students = pd.read_csv('university_student_dashboard_data.csv')
 
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import streamlit as st
+
+students = pd.read_csv('university_student_dashboard_data.csv')
+
+
 # Sidebar Filters
 st.sidebar.header('Filters')
 term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'].unique()))
 
 # Other filters
-year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), none)
+year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
 
 if not term_filter and not year:
     filtered_students = students
@@ -23,9 +31,12 @@ else:
 
 # KPIs
 st.title('University Students Dashboard')
-st.metric('Total Applications', filtered_students['Applications'].sum())
-st.metric('Total Admissions', filtered_students['Admitted'].sum())
-st.metric('Total Enrollment', filtered_students['Enrolled'].sum())
+st.metric('Total Applications Since 2015', students['Applications'].sum())
+st.metric('Filtered Applications', filtered_students['Applications'].sum())
+st.metric('Total Admissions Since 2015', students['Admitted'].sum())
+st.metric('Filtered Admissions', filtered_students['Admitted'].sum())
+st.metric('Total Enrollment Since 2015', students['Enrolled'].sum())
+st.metric('Filtered Enrollment', filtered_students['Enrolled'].sum())
 
 # Charts
 st.subheader('Charts')
