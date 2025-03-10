@@ -15,8 +15,6 @@ term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'
 year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
 filtered_students = students[students['Year'] == year]
 
-if term_filter != 'All':
-    filtered_students = students[students['Term'] == term_filter]
 if not term_filter and not year:
     filtered_students = students
 elif term_filter and not year:
