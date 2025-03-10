@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+students = pd.read_csv('university_student_dashboard_data.csv')
+
 # KPIs
 st.title('University Students Dashboard')
 st.metric('Total Applications', students['Applications'].sum())
