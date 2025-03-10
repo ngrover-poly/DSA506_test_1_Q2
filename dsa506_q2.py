@@ -14,10 +14,10 @@ st.metric('Total Enrollment', students['Enrolled'].sum())
 # Sidebar Filters
 st.sidebar.header('Filters')
 term_filter = st.sidebar.selectbox('Select Term', ['All'] + list(students['Term'].unique()))
-filtered_students = students.copy()
+
 if term_filter != 'All':
-    filtered_students = filtered_students[filtered_students['Term'] == term_filter]
-school_filter = st.sidebar.selectbox('Select School',['All'] + ['Arts Enrolled', 'Business Enrolled', 'Engineering Enrolled', 'Science Enrolled'])
+    students = students[students['Term'] == term_filter]
+school_filter = st.sidebar.selectbox('Select School',['All'] + ['Arts', 'Business', 'Engineering', 'Science'])
 
 def handle_input(df, school_filter): 
     match school_filter:
@@ -32,6 +32,6 @@ def handle_input(df, school_filter):
         case  _:
             return df 
             
-filtered_students = handle_input(filtered_students, school_filter)
+students = handle_input(filtered_students, school_filter)
 
 year = st.slider("Select Year:", int(students["Year"].min()), int(students["Year"].max()), int(students["Year"].min()))
